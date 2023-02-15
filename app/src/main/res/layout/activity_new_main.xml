@@ -12,13 +12,24 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
+        <TextView
+            android:id="@+id/emailTV"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="your email"
+            android:layout_margin="30dp"
+            android:textStyle="bold"
+            />
+
         <EditText
             android:id="@+id/firstName"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:hint="First Name"
             android:background="@null"
-            android:layout_margin="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/colorTextFirst" />
@@ -66,12 +77,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Go to OTP Verification"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/readBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go To Read Data"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.941"
+            android:layout_marginTop="30dp"
             android:gravity="center"/>
 
     </LinearLayout>

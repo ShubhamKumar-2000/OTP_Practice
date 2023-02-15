@@ -16,7 +16,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
-
+/*OTP first part*/
 public class MainActivity extends AppCompatActivity {
     EditText enterNumber;
     Button getOtpBtn;

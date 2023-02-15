@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -20,11 +22,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+/*New firestore Registration Code Logic part 2*/
 public class NewMainActivity extends AppCompatActivity {
-    Button buttonOTP;
+    Button buttonOTP, readBtn;
     FirebaseFirestore db;
-    EditText firstName, lastName, phone;
+    EditText firstName, lastName, phone, email;
     MaterialButton registrationBtn;
+    TextView emailTV;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -32,8 +36,18 @@ public class NewMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_main);
 
-        buttonOTP = findViewById(R.id.goToVerificationBtn);
+        init();
 
+        /*redirect to read Activity of Firestore db will remove*/
+        readBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ReadActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        /*redirect to OTP section code will remove from here*/
         buttonOTP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,11 +56,10 @@ public class NewMainActivity extends AppCompatActivity {
             }
         });
 
-        firstName = findViewById(R.id.firstName);
-        lastName = findViewById(R.id.lastName);
-        phone = findViewById(R.id.phone);
-        registrationBtn = findViewById(R.id.btnRegister);
-        db = FirebaseFirestore.getInstance();
+        Intent intent = getIntent();
+        final String USER_ID = intent.getStringExtra("Unique ID");
+        final String EMAIL_ID = intent.getStringExtra("Email ID");
+        emailTV.setText(EMAIL_ID);
 
         registrationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,25 +67,42 @@ public class NewMainActivity extends AppCompatActivity {
                 String Firstname = firstName.getText().toString().trim();
                 String Lastname = lastName.getText().toString().trim();
                 String PhoneNo = phone.getText().toString().trim();
-                Map<String, Object> user = new HashMap<>();
-                user.put("First Name",Firstname);
-                user.put("Last Name",Lastname);
-                user.put("Phone Number", PhoneNo);
+                Map<String, Object> userData = new HashMap<>();
+                userData.put("Email ID", EMAIL_ID);
+                userData.put("First Name", Firstname);
+                userData.put("Last Name", Lastname);
+                userData.put("Phone Number", PhoneNo);
 
-                db.collection("user")
-                        .add(user)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                DocumentReference userRef = db.collection("users").document(USER_ID);
+                userRef.set(userData)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(NewMainActivity.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
+                            public void onSuccess(Void unused) {
+                                Log.d("User","Profile created for " + USER_ID);
+                                Intent i = new Intent(NewMainActivity.this, LoginActivity.class);
+                                startActivity(i);
+                                finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
+                                Log.d("FireStore", e.getMessage());
                                 Toast.makeText(NewMainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
             }
         });
+    }
+
+    private void init() {
+        emailTV = findViewById(R.id.emailTV);
+        email = findViewById(R.id.email);
+        buttonOTP = findViewById(R.id.goToVerificationBtn);
+        readBtn = findViewById(R.id.readBtn);
+        firstName = findViewById(R.id.firstName);
+        lastName = findViewById(R.id.lastName);
+        phone = findViewById(R.id.phone);
+        registrationBtn = findViewById(R.id.btnRegister);
+        db = FirebaseFirestore.getInstance();
     }
 }

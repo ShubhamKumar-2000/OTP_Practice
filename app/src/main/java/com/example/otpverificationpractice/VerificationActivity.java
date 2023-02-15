@@ -23,7 +23,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
-
+/*OTP verification 2nd part*/
 public class VerificationActivity extends AppCompatActivity {
     EditText inputNumber1, inputNumber2, inputNumber3, inputNumber4, inputNumber5, inputNumber6;
     TextView textView, resendLabel;
@@ -46,6 +46,7 @@ public class VerificationActivity extends AppCompatActivity {
         verifyButtonClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //checks if the user enters all the OTP field or not will proceed only when user had filled all OTP sections
                 if (!inputNumber1.getText().toString().trim().isEmpty() && !inputNumber2.getText().toString().trim().isEmpty()
                         && !inputNumber3.getText().toString().trim().isEmpty() && !inputNumber4.getText().toString().trim().isEmpty()
                         && !inputNumber5.getText().toString().trim().isEmpty() && !inputNumber6.getText().toString().trim().isEmpty()) {
@@ -61,7 +62,7 @@ public class VerificationActivity extends AppCompatActivity {
                     if (getOtpBackend != null) {
                         progressBarVerifyOtp.setVisibility(View.VISIBLE);
                         verifyButtonClick.setVisibility(View.INVISIBLE);
-
+// the below methods/lines checks the backend otp and user's current entered otp
                         PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(getOtpBackend, enterCodeOtp);
                         FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential)
                                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -69,7 +70,7 @@ public class VerificationActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         progressBarVerifyOtp.setVisibility(View.GONE);
                                         verifyButtonClick.setVisibility(View.VISIBLE);
-
+                                        //Apply here the password reset Logic
                                         if (task.isSuccessful()) {
                                             Intent intent = new Intent(getApplicationContext(), dashboard.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
