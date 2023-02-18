@@ -4,13 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    tools:context=".dashboard">
+    android:gravity="center_horizontal"
+    tools:context=".dashboard"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Demo screen" />
+        android:text="Enter new password"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorTextFirst"
+        />
+
+    <EditText
+        android:id="@+id/newPasswordET"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:textColor="@color/colorTextFirst"/>
+
+    <Button
+        android:id="@+id/newPasswordSubmitBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:textStyle="bold"
+        android:layout_margin="30dp"
+        />
+
 
 
 </LinearLayout>

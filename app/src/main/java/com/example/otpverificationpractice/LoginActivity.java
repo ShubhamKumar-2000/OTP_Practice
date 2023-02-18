@@ -3,6 +3,7 @@ package com.example.otpverificationpractice;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,21 +21,25 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
 
     EditText mEmail, mPassword;
-    Button mLogin, mRegistration;
+    Button mLogin, mRegistration, ForgotPassBtn;
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener firebaseAuthListener;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mEmail = findViewById(R.id.email);
-        mPassword = findViewById(R.id.password);
-        mLogin = findViewById(R.id.login);
-        mRegistration = findViewById(R.id.registration);
-        mAuth = FirebaseAuth.getInstance();
+        init();
 
+        ForgotPassBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(LoginActivity.this, ForgetPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
         /*Login code*/
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +74,15 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void init() {
+        mEmail = findViewById(R.id.email);
+        mPassword = findViewById(R.id.password);
+        mLogin = findViewById(R.id.login);
+        mRegistration = findViewById(R.id.registration);
+        mAuth = FirebaseAuth.getInstance();
+        ForgotPassBtn = findViewById(R.id.forgotPasswordBtn);
     }
 
     //When initializing your Activity, check to see if the user is currently signed in

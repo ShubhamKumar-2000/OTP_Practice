@@ -36,23 +36,17 @@
             android:layout_height="wrap_content"
             android:text="Login"
             />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New User?"
-        android:textStyle="bold"
-        android:textColor="@color/colorTextFirst"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"/>
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New User?"
+            android:textStyle="bold"
+            android:textColor="@color/colorTextFirst"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"/>
 
         <Button
             android:id="@+id/registration"
@@ -61,6 +55,23 @@
             android:text="Register Here"
             />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:textStyle="bold"
+            android:textColor="@color/colorTextFirst"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"/>
+
+        <Button
+            android:id="@+id/forgotPasswordBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Click Here"
+            />
 
     </LinearLayout>
 

@@ -40,7 +40,7 @@ public class RegistrationActivity extends AppCompatActivity {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String email = mEmail.getText().toString();
+                final String email = mEmail.getText().toString().trim().toLowerCase();
                 final String password = mPassword.getText().toString();
                 /*Here Implement before registration check if user with given email exists or not*/
                 mAuth.createUserWithEmailAndPassword(email, password)

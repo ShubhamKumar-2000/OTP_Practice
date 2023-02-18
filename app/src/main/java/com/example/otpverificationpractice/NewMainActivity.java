@@ -24,7 +24,7 @@ import java.util.Map;
 
 /*New firestore Registration Code Logic part 2*/
 public class NewMainActivity extends AppCompatActivity {
-    Button buttonOTP, readBtn;
+    Button readBtn;
     FirebaseFirestore db;
     EditText firstName, lastName, phone, email;
     MaterialButton registrationBtn;
@@ -43,15 +43,6 @@ public class NewMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ReadActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        /*redirect to OTP section code will remove from here*/
-        buttonOTP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -97,7 +88,6 @@ public class NewMainActivity extends AppCompatActivity {
     private void init() {
         emailTV = findViewById(R.id.emailTV);
         email = findViewById(R.id.email);
-        buttonOTP = findViewById(R.id.goToVerificationBtn);
         readBtn = findViewById(R.id.readBtn);
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
